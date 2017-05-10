@@ -10,35 +10,50 @@ class App extends Component {
       digit: '0'
     }
 
+    this.inputDigit = this.inputDigit.bind(this);
+    this.clearDisplay = this.clearDisplay.bind(this);
+
+  }
+
+  inputDigit(val) {
+    this.setState({
+      digit: this.state.digit === '0' ? String(val) : this.state.digit + val
+    })
+  }
+
+  clearDisplay() {
+    this.setState({
+      digit: '0'
+    })
   }
 
   render() {
     return (
       <div className="App">
         <div className="calculator">
-          <div className="display">0</div>
+          <div className="display">{this.state.digit}</div>
           <div className="buttons">
-            <div className="button top">AC</div>
+            <div className="button top" onClick={this.clearDisplay}>AC</div>
             <div className="button top">+/-</div>
             <div className="button top">%</div>
             <div className="button right">div</div>
 
-            <div className="button classic">7</div>
-            <div className="button classic">8</div>
-            <div className="button classic">9</div>
+            <div className="button classic" onClick={() => this.inputDigit(7)}>7</div>
+            <div className="button classic" onClick={() => this.inputDigit(8)}>8</div>
+            <div className="button classic" onClick={() => this.inputDigit(9)}>9</div>
             <div className="button right">X</div>
 
-            <div className="button classic">4</div>
-            <div className="button classic">5</div>
-            <div className="button classic">6</div>
+            <div className="button classic" onClick={() => this.inputDigit(4)}>4</div>
+            <div className="button classic" onClick={() => this.inputDigit(5)}>5</div>
+            <div className="button classic" onClick={() => this.inputDigit(6)}>6</div>
             <div className="button right">-</div>
 
-            <div className="button classic">1</div>
-            <div className="button classic">2</div>
-            <div className="button classic">3</div>
+            <div className="button classic" onClick={() => this.inputDigit(1)}>1</div>
+            <div className="button classic" onClick={() => this.inputDigit(2)}>2</div>
+            <div className="button classic" onClick={() => this.inputDigit(3)}>3</div>
             <div className="button right">+</div>
 
-            <div className="button classic zero">0</div>
+            <div className="button classic zero" onClick={() => this.inputDigit(0)}>0</div>
             <div className="button classic">.</div>
             <div className="button right">=</div>
           </div>
