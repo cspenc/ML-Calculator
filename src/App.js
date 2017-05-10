@@ -12,6 +12,7 @@ class App extends Component {
 
     this.inputDigit = this.inputDigit.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
+    this.inputDot = this.inputDot.bind(this);
 
   }
 
@@ -25,6 +26,15 @@ class App extends Component {
     this.setState({
       digit: '0'
     })
+  }
+
+  inputDot() {
+    const num = this.state.digit
+    if (!num.includes('.')) {
+      this.setState({
+        digit: num + '.'
+      })
+    }
   }
 
   render() {
@@ -54,7 +64,7 @@ class App extends Component {
             <div className="button right">+</div>
 
             <div className="button classic zero" onClick={() => this.inputDigit(0)}>0</div>
-            <div className="button classic">.</div>
+            <div className="button classic" onClick={this.inputDot}>.</div>
             <div className="button right">=</div>
           </div>
         </div>

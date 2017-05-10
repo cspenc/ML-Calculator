@@ -20,6 +20,7 @@
   display: flex;
   flex-wrap: wrap;
   flex: 1 100%;
+  border: 1px solid black;
 }
 
 .buttons {
