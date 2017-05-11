@@ -46,8 +46,10 @@ class App extends Component {
   }
 
   percent() {
+    const num = parseFloat(this.state.digit)/100
+
     this.setState({
-      digit: this.state.digit
+      digit: String(num)
     })
   }
 
@@ -65,7 +67,7 @@ class App extends Component {
             <div className="button classic" onClick={() => this.inputDigit('7')}>7</div>
             <div className="button classic" onClick={() => this.inputDigit('8')}>8</div>
             <div className="button classic" onClick={() => this.inputDigit('9')}>9</div>
-            <div className="button right">X</div>
+            <div className="button right">×</div>
 
             <div className="button classic" onClick={() => this.inputDigit('4')}>4</div>
             <div className="button classic" onClick={() => this.inputDigit('5')}>5</div>
