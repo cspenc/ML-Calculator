@@ -100,7 +100,24 @@ class App extends Component {
           operator: '',
           second: ''
         })
-      }
+      } else if (operator === 'sub') {
+        this.setState({
+          digit: String(first - second),
+          operator: '',
+          second: ''
+        })
+      } else if (operator === 'mult') {
+        this.setState({
+          digit: String(first * second),
+          operator: '',
+          second: ''
+        })
+      } else if (operator === 'div')
+      this.setState({
+        digit: String(first / second),
+        operator: '',
+        second: ''
+      })
     }
 
 
@@ -115,17 +132,17 @@ class App extends Component {
             <div className="button top" onClick={this.clearDisplay}>AC</div>
             <div className="button top" onClick={this.neg}>±</div>
             <div className="button top" onClick={this.percent}>%</div>
-            <div className="button right">÷</div>
+            <div className="button right" onClick={() => this.operate('div')}>÷</div>
 
             <div className="button classic" onClick={() => this.inputDigit('7')}>7</div>
             <div className="button classic" onClick={() => this.inputDigit('8')}>8</div>
             <div className="button classic" onClick={() => this.inputDigit('9')}>9</div>
-            <div className="button right">×</div>
+            <div className="button right" onClick={() => this.operate('mult')}>×</div>
 
             <div className="button classic" onClick={() => this.inputDigit('4')}>4</div>
             <div className="button classic" onClick={() => this.inputDigit('5')}>5</div>
             <div className="button classic" onClick={() => this.inputDigit('6')}>6</div>
-            <div className="button right">–</div>
+            <div className="button right" onClick={() => this.operate('sub')}>–</div>
 
             <div className="button classic" onClick={() => this.inputDigit('1')}>1</div>
             <div className="button classic" onClick={() => this.inputDigit('2')}>2</div>
