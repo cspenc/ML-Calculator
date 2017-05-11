@@ -81,10 +81,10 @@ class App extends Component {
     })
   }
 
-  operate() {
+  operate(func) {
     this.setState({
       waiting: true,
-      operator: '+'
+      operator: func
     })
   }
 
@@ -92,7 +92,16 @@ class App extends Component {
     const first = parseFloat(this.state.secondary)
     const second = parseFloat(this.state.digit)
     const operator = this.state.operator
-    // const ans = first operator second
+
+    if (!!operator) {
+      if (operator === 'add') {
+        this.setState({
+          digit: String(first + second),
+          operator: '',
+          second: ''
+        })
+      }
+    }
 
 
   }
@@ -121,7 +130,7 @@ class App extends Component {
             <div className="button classic" onClick={() => this.inputDigit('1')}>1</div>
             <div className="button classic" onClick={() => this.inputDigit('2')}>2</div>
             <div className="button classic" onClick={() => this.inputDigit('3')}>3</div>
-            <div className="button right" onClick={() => this.operate('+')}>+</div>
+            <div className="button right" onClick={() => this.operate('add')}>+</div>
 
             <div className="button classic zero" onClick={() => this.inputDigit('0')}>0</div>
             <div className="button classic" onClick={this.inputDot}>.</div>
