@@ -13,7 +13,8 @@
 .display {
   background:black;
   color: white;
-  padding-right: 5px;
+  padding-right: 10px;
+  font-weight: 100;
   font-size: 4em;
   line-height: 90px;
   justify-content: flex-end;
