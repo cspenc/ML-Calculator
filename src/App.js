@@ -7,7 +7,10 @@ class App extends Component {
     super(props);
 
     this.state = {
-      digit: '0'
+      digit: '0',
+      secondary: '',
+      waiting: false,
+      operator: ''
     }
 
     this.inputDigit = this.inputDigit.bind(this);
@@ -15,28 +18,53 @@ class App extends Component {
     this.inputDot = this.inputDot.bind(this);
     this.neg = this.neg.bind(this);
     this.percent = this.percent.bind(this);
+    this.operate = this.operate.bind(this);
+    this.enter = this.enter.bind(this);
 
   }
 
+////// DOCUMENT BEFORE SENDING ///////
+
   inputDigit(val) {
-    this.setState({
-      digit: this.state.digit === '0' ? val : this.state.digit + val
-    })
+    if (this.state.waiting) {
+      this.setState({
+        secondary: this.state.digit,
+        digit: val,
+        waiting: false
+      })
+    } else {
+      this.setState({
+        digit: this.state.digit === '0' ? val : this.state.digit + val
+      })
+    }
   }
 
   clearDisplay() {
     this.setState({
-      digit: '0'
+      digit: '0',
+      secondary: '',
+      waiting: false,
+      operator: ''
     })
   }
 
   inputDot() {
     const num = this.state.digit
-    if (!num.includes('.')) {
+
+    if (this.state.waiting) {
       this.setState({
-        digit: num + '.'
+        secondary: this.state.digit,
+        digit: '0.',
+        waiting: false
       })
+    } else {
+      if (!num.includes('.')) {
+        this.setState({
+          digit: num + '.'
+        })
+      }
     }
+
   }
 
   neg() {
@@ -51,6 +79,22 @@ class App extends Component {
     this.setState({
       digit: String(num)
     })
+  }
+
+  operate() {
+    this.setState({
+      waiting: true,
+      operator: '+'
+    })
+  }
+
+  enter() {
+    const first = parseFloat(this.state.secondary)
+    const second = parseFloat(this.state.digit)
+    const operator = this.state.operator
+    // const ans = first operator second
+
+
   }
 
   render() {
@@ -77,11 +121,11 @@ class App extends Component {
             <div className="button classic" onClick={() => this.inputDigit('1')}>1</div>
             <div className="button classic" onClick={() => this.inputDigit('2')}>2</div>
             <div className="button classic" onClick={() => this.inputDigit('3')}>3</div>
-            <div className="button right">+</div>
+            <div className="button right" onClick={() => this.operate('+')}>+</div>
 
             <div className="button classic zero" onClick={() => this.inputDigit('0')}>0</div>
             <div className="button classic" onClick={this.inputDot}>.</div>
-            <div className="button right">=</div>
+            <div className="button right" onClick={this.enter}>=</div>
           </div>
         </div>
       </div>
