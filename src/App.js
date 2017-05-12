@@ -6,6 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
+    // this is where i initiate state
     this.state = {
       digit: '0',
       secondary: '',
@@ -13,6 +14,7 @@ class App extends Component {
       operator: ''
     }
 
+    // this is where i bind my functions
     this.inputDigit = this.inputDigit.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
     this.inputDot = this.inputDot.bind(this);
@@ -26,7 +28,7 @@ class App extends Component {
 ////// DOCUMENT BEFORE SENDING ///////
 
   inputDigit(val) {
-    if (this.state.waiting) {
+    if (this.state.waiting && !this.state.secondary) {
       this.setState({
         secondary: this.state.digit,
         digit: val,
@@ -46,6 +48,7 @@ class App extends Component {
       waiting: false,
       operator: ''
     })
+
   }
 
   inputDot() {
@@ -82,6 +85,16 @@ class App extends Component {
   }
 
   operate(func) {
+
+    // if the secondary number is true and waiting is false, evaluate because this means
+    // an operator button has been pressed twice
+    if (!!this.state.secondary && !this.state.waiting) {
+      this.enter(this.state.operator)
+    }
+
+    // when operator button is clicked, set waiting state to true so that calc will know
+    // a second number is coming. also set which operator was clicked so that it can be
+    // evaluated after the number is entered
     this.setState({
       waiting: true,
       operator: func
@@ -98,34 +111,34 @@ class App extends Component {
         this.setState({
           digit: String(first + second),
           operator: '',
-          second: ''
+          secondary: ''
         })
       } else if (operator === 'sub') {
         this.setState({
           digit: String(first - second),
           operator: '',
-          second: ''
+          secondary: ''
         })
       } else if (operator === 'mult') {
         this.setState({
           digit: String(first * second),
           operator: '',
-          second: ''
+          secondary: ''
         })
       } else if (operator === 'div')
       this.setState({
         digit: String(first / second),
         operator: '',
-        second: ''
+        secondary: ''
       })
     }
-
 
   }
 
   render() {
     return (
       <div className="App">
+        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         <div className="calculator">
           <div className="display">{this.state.digit}</div>
           <div className="buttons">
