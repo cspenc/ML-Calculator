@@ -17,7 +17,7 @@ class App extends Component {
     // This is where I bind my functions
     this.inputDigit = this.inputDigit.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
-    this.inputDot = this.inputDot.bind(this);
+    this.inputDecimal = this.inputDecimal.bind(this);
     this.neg = this.neg.bind(this);
     this.percent = this.percent.bind(this);
     this.operate = this.operate.bind(this);
@@ -25,14 +25,20 @@ class App extends Component {
   }
 
   // InputDigit function accepts a value, this is what is fired when a button is clicked
-  
   inputDigit(val) {
+
+    // if statement checks to see if waiting is true, meaning that a function button has
+    // been pressed, and that secondary state is empty
+    // if this is true, move the display numbers (digit) to secondary, and then add
+    // second part of equation to digit state
     if (this.state.waiting && !this.state.secondary) {
       this.setState({
         secondary: this.state.digit,
         digit: val,
         waiting: false
       })
+    // else set the digit state to number being pressed, if digit is zero, change it to
+    // the new number, if not zero, add new numbers to end of current digits
     } else {
       this.setState({
         digit: this.state.digit === '0' ? val : this.state.digit + val
@@ -40,6 +46,8 @@ class App extends Component {
     }
   }
 
+  // function is called when AC is pressed, clears the display and resets state to
+  // what is set during initiation
   clearDisplay() {
     this.setState({
       digit: '0',
@@ -47,10 +55,10 @@ class App extends Component {
       waiting: false,
       operator: ''
     })
-
   }
 
-  inputDot() {
+  // inputDecimal allows a decimal to be added
+  inputDecimal() {
     const num = this.state.digit
 
     if (this.state.waiting) {
@@ -161,7 +169,7 @@ class App extends Component {
             <div className="button right" onClick={() => this.operate('add')}>+</div>
 
             <div className="button classic zero" onClick={() => this.inputDigit('0')}>0</div>
-            <div className="button classic" onClick={this.inputDot}>.</div>
+            <div className="button classic" onClick={this.inputDecimal}>.</div>
             <div className="button right" onClick={this.enter}>=</div>
           </div>
         </div>
