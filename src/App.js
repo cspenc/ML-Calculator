@@ -61,6 +61,7 @@ class App extends Component {
   inputDecimal() {
     const num = this.state.digit
 
+    // if waiting is true and decimal is clicked, change digit to 0.
     if (this.state.waiting) {
       this.setState({
         secondary: this.state.digit,
@@ -68,6 +69,8 @@ class App extends Component {
         waiting: false
       })
     } else {
+      // else, if there is no decimal already included, take the current number
+      // and add a decimal after
       if (!num.includes('.')) {
         this.setState({
           digit: num + '.'
@@ -77,12 +80,17 @@ class App extends Component {
 
   }
 
+  // +/- sign
+  // make things negative or positive
+  // if - is the first character, then get rid of -, if - isn't there, add it
   neg() {
     this.setState({
       digit: this.state.digit.charAt(0) === '-' ? this.state.digit.substr(1) : '-' + this.state.digit
     })
   }
 
+  // for percentage, turn the string into a number and then divide by 100
+  // turn it back into a string
   percent() {
     const num = parseFloat(this.state.digit)/100
 
@@ -108,30 +116,36 @@ class App extends Component {
     })
   }
 
+  // enter is what is called when = is pressed or when an operator is pressed twice
   enter() {
     const first = parseFloat(this.state.secondary)
     const second = parseFloat(this.state.digit)
     const operator = this.state.operator
 
+    // if the operater state is set, move on
     if (!!operator) {
+      // if operator is add, add first to second and return to string, clear out other state
       if (operator === 'add') {
         this.setState({
           digit: String(first + second),
           operator: '',
           secondary: ''
         })
+      // subtract second number from first, set digit state and reset other state
       } else if (operator === 'sub') {
         this.setState({
           digit: String(first - second),
           operator: '',
           secondary: ''
         })
+      // multiply first times second number, set digit state and reset other state
       } else if (operator === 'mult') {
         this.setState({
           digit: String(first * second),
           operator: '',
           secondary: ''
         })
+      // divide first by second, set digit state and reset other state
       } else if (operator === 'div')
       this.setState({
         digit: String(first / second),
@@ -142,6 +156,8 @@ class App extends Component {
 
   }
 
+  // this is where the actual calculator html is located
+  // i used divs with onClick operators to call the functions
   render() {
     return (
       <div className="App">
