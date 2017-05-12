@@ -138,7 +138,6 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-        <pre>{JSON.stringify(this.state, null, 2)}</pre>
         <div className="calculator">
           <div className="display">{this.state.digit}</div>
           <div className="buttons">
