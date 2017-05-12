@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:300');
+
 .App {
   display: flex;
   justify-content: center;
@@ -5,13 +7,14 @@
 }
 
 .calculator {
+  font-family: 'Open Sans', sans-serif;
   width: 300px;
   display: flex;
   flex-wrap: wrap;
 }
 
 .display {
-  background:black;
+  background: #202020;
   color: white;
   padding-right: 10px;
   font-weight: 100;
@@ -35,7 +38,7 @@
 }
 
 .button {
-  background: lightgray;
+  background: #D0D2D4;
   color: black;
   display: flex;
   justify-content: center;
@@ -43,11 +46,11 @@
 }
 
 .button.top {
-  background: darkgray;
+  background: #C5C7C8;
 }
 
 .button.right {
-  background: orange;
+  background: #F98810;
   color: white;
 }
 
