@@ -6,7 +6,7 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    // this is where i initiate state
+    // This is where I initiate state
     this.state = {
       digit: '0',
       secondary: '',
@@ -14,7 +14,7 @@ class App extends Component {
       operator: ''
     }
 
-    // this is where i bind my functions
+    // This is where I bind my functions
     this.inputDigit = this.inputDigit.bind(this);
     this.clearDisplay = this.clearDisplay.bind(this);
     this.inputDot = this.inputDot.bind(this);
@@ -22,11 +22,10 @@ class App extends Component {
     this.percent = this.percent.bind(this);
     this.operate = this.operate.bind(this);
     this.enter = this.enter.bind(this);
-
   }
 
-////// DOCUMENT BEFORE SENDING ///////
-
+  // InputDigit function accepts a value, this is what is fired when a button is clicked
+  
   inputDigit(val) {
     if (this.state.waiting && !this.state.secondary) {
       this.setState({
